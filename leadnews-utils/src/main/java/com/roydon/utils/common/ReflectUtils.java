@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 public class ReflectUtils {
 
-
     /**
      * 转换为Map
      *
@@ -72,7 +71,6 @@ public class ReflectUtils {
         }
     }
 
-
     /**
      * 通过反射将map的key value 映射到实体类中
      *
@@ -85,9 +83,7 @@ public class ReflectUtils {
                 setPropertie(bean, entry.getKey(), entry.getValue());
             }
         }
-
     }
-
 
     /**
      * 获取属性的值
@@ -106,7 +102,6 @@ public class ReflectUtils {
         return value;
     }
 
-
     public static Object getPropertyDescriptorValue(Object bean, PropertyDescriptor propertyDescriptor) {
         Object value = null;
         if (null != propertyDescriptor) {
@@ -115,7 +110,6 @@ public class ReflectUtils {
         }
         return value;
     }
-
 
     public static void setPropertyDescriptorValue(Object bean, PropertyDescriptor propertyDescriptor, Object value) {
         if (null != propertyDescriptor) {
@@ -143,7 +137,6 @@ public class ReflectUtils {
         return propertyDescriptor;
     }
 
-
     /**
      * 获取 PropertyDescriptor 属性
      *
@@ -155,7 +148,6 @@ public class ReflectUtils {
         PropertyDescriptor[] propertyDescriptorArray = getPropertyDescriptorArray(bean);
         return getPropertyDescriptor(propertyDescriptorArray, key);
     }
-
 
     /**
      * invok 调用方法
@@ -279,7 +271,6 @@ public class ReflectUtils {
         }
     }
 
-
     /**
      * 通过反射获取class字节码文件
      *
@@ -297,7 +288,6 @@ public class ReflectUtils {
         }
         return clazz;
     }
-
 
     /**
      * 通过反射获取对象
@@ -346,6 +336,5 @@ public class ReflectUtils {
         PropertyDescriptor propertyDescriptor = getPropertyDescriptor(bean, key);
         return getFieldAnnotations(bean, propertyDescriptor);
     }
-
 
 }
