@@ -1,4 +1,4 @@
-package com.roydon.model.common.dtos;
+package com.roydon.model.common.dto;
 
 import com.alibaba.fastjson.JSON;
 import com.roydon.model.common.enums.AppHttpCodeEnum;

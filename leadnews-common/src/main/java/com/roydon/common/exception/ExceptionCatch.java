@@ -1,6 +1,6 @@
 package com.roydon.common.exception;
 
-import com.roydon.model.common.dtos.ResponseResult;
+import com.roydon.model.common.dto.ResponseResult;
 import com.roydon.model.common.enums.AppHttpCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;

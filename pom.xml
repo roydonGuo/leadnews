@@ -26,13 +26,13 @@
     </parent>
 
     <properties>
-        <!--  项目源码及编译输出的编码  -->
+        <!-- 项目源码及编译输出的编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!--  项目编译JDK版本  -->
+        <!-- 项目编译JDK版本 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!--  依赖包版本管理  -->
+        <!-- 依赖包版本管理 -->
         <spring.boot.version>2.3.9.RELEASE</spring.boot.version>
         <commons.io.version>2.6</commons.io.version>
         <commons.codec.version>1.12</commons.codec.version>
@@ -64,47 +64,50 @@
         <reflections.version>0.9.11</reflections.version>
         <swagger.version>2.9.2</swagger.version>
         <knife4j.version>2.0.2</knife4j.version>
-        <com.alibaba.cloud>2.2.5.RELEASE</com.alibaba.cloud>
+        <com.alibaba.cloud>2.2.6.RELEASE</com.alibaba.cloud>
         <xxl.job.version>2.2.0-SNAPSHOT</xxl.job.version>
     </properties>
+
     <dependencies>
         <!-- 日志处理包 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-log4j2</artifactId>-->
+<!--        </dependency>-->
         <!--  lombok  -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
-            <!-- 内部依赖工程 -->
+            <!-- leadnews-feign-api -->
             <dependency>
                 <artifactId>leadnews-feign-api</artifactId>
                 <groupId>com.roydon</groupId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- leadnews-common -->
             <dependency>
                 <artifactId>leadnews-common</artifactId>
                 <groupId>com.roydon</groupId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- leadnews-model -->
             <dependency>
                 <artifactId>leadnews-model</artifactId>
                 <groupId>com.roydon</groupId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- leadnews-utils -->
             <dependency>
                 <artifactId>leadnews-utils</artifactId>
                 <groupId>com.roydon</groupId>
                 <version>${project.version}</version>
             </dependency>
-            <!--  Spring boot 特殊处理包  -->
+            <!--  Spring boot 特殊处理包 reflections -->
             <dependency>
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
@@ -114,34 +117,34 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <!--  排除默认的logback日志，使用log4j -->
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                </exclusions>
+<!--                <exclusions>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>org.springframework.boot</groupId>-->
+<!--                        <artifactId>spring-boot-starter-logging</artifactId>-->
+<!--                    </exclusion>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>org.slf4j</groupId>-->
+<!--                        <artifactId>slf4j-log4j12</artifactId>-->
+<!--                    </exclusion>-->
+<!--                </exclusions>-->
                 <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                </exclusions>
+<!--                <exclusions>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>org.springframework.boot</groupId>-->
+<!--                        <artifactId>spring-boot-starter-logging</artifactId>-->
+<!--                    </exclusion>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>org.slf4j</groupId>-->
+<!--                        <artifactId>slf4j-log4j12</artifactId>-->
+<!--                    </exclusion>-->
+<!--                </exclusions>-->
                 <version>${spring.boot.version}</version>
             </dependency>
-            <!-- Apache 工具包包 -->
+            <!-- Apache 工具包 commons-io -->
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
@@ -158,12 +161,13 @@
                 <artifactId>commons-codec</artifactId>
                 <version>${commons.codec.version}</version>
             </dependency>
-            <!--  Mysql 数据库  -->
+            <!-- Mysql -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
+            <!-- mybatis -->
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
@@ -173,6 +177,11 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
             </dependency>
             <!--  jsoup  -->
             <dependency>
@@ -192,16 +201,16 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.fasterxml.jackson.dataformat</groupId>-->
-<!--                <artifactId>jackson-dataformat-cbor</artifactId>-->
-<!--                <version>${fastjson.dataformat.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>com.fasterxml.jackson.dataformat</groupId>-->
-<!--                <artifactId>jackson-dataformat-xml</artifactId>-->
-<!--                <version>${fastjson.dataformat.version}</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.fasterxml.jackson.dataformat</groupId>-->
+            <!--                <artifactId>jackson-dataformat-cbor</artifactId>-->
+            <!--                <version>${fastjson.dataformat.version}</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.fasterxml.jackson.dataformat</groupId>-->
+            <!--                <artifactId>jackson-dataformat-xml</artifactId>-->
+            <!--                <version>${fastjson.dataformat.version}</version>-->
+            <!--            </dependency>-->
             <!--  spring colud  -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -249,6 +258,7 @@
                 <artifactId>fastdfs-client</artifactId>
                 <version>${fastdfs.version}</version>
             </dependency>
+            <!-- aliyun java sdk-->
             <dependency>
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-core</artifactId>
@@ -265,7 +275,7 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
-            <!--  kafkfa  -->
+            <!--  kafka  -->
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
@@ -287,11 +297,11 @@
                 <artifactId>kafka-clients</artifactId>
                 <version>${kafka.client.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.github.xiaoymin</groupId>-->
+<!--                <artifactId>knife4j-spring-boot-starter</artifactId>-->
+<!--                <version>${knife4j.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -301,11 +311,6 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis.plus.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
