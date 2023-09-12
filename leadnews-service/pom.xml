@@ -15,6 +15,7 @@
     <modules>
         <module>leadnews-service-user</module>
         <module>leadnews-service-article</module>
+        <module>leadnews-service-wemedia</module>
     </modules>
 
     <properties>

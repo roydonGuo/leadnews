@@ -17,6 +17,7 @@
         <module>leadnews-gateway</module>
         <module>leadnews-feign-api</module>
         <module>leadnews-test</module>
+        <module>leadnews-basic</module>
     </modules>
 
     <parent>
@@ -297,11 +298,11 @@
                 <artifactId>kafka-clients</artifactId>
                 <version>${kafka.client.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.github.xiaoymin</groupId>-->
-<!--                <artifactId>knife4j-spring-boot-starter</artifactId>-->
-<!--                <version>${knife4j.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>

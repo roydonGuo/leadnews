@@ -16,15 +16,15 @@ public class AppJwtUtil {
     private static final int REFRESH_TIME = 300;
 
     // 生产ID
-    public static String getToken(Long id){
+    public static String getToken(Long id) {
         Map<String, Object> claimMaps = new HashMap<>();
-        claimMaps.put("id",id);
+        claimMaps.put("id", id);
         long currentTime = System.currentTimeMillis();
         return Jwts.builder()
                 .setId(UUID.randomUUID().toString())
                 .setIssuedAt(new Date(currentTime))  //签发时间
                 .setSubject("system")  //说明
-                .setIssuer("heima") //签发者信息
+                .setIssuer("roydon") //签发者信息
                 .setAudience("app")  //接收用户
                 .compressWith(CompressionCodecs.GZIP)  //数据压缩方式
                 .signWith(SignatureAlgorithm.HS512, generalKey()) //加密方式
@@ -40,9 +40,9 @@ public class AppJwtUtil {
      * @return
      */
     private static Jws<Claims> getJws(String token) {
-            return Jwts.parser()
-                    .setSigningKey(generalKey())
-                    .parseClaimsJws(token);
+        return Jwts.parser()
+                .setSigningKey(generalKey())
+                .parseClaimsJws(token);
     }
 
     /**
@@ -54,7 +54,7 @@ public class AppJwtUtil {
     public static Claims getClaimsBody(String token) {
         try {
             return getJws(token).getBody();
-        }catch (ExpiredJwtException e){
+        } catch (ExpiredJwtException e) {
             return null;
         }
     }
@@ -76,21 +76,21 @@ public class AppJwtUtil {
      * @return -1：有效，0：有效，1：过期，2：过期
      */
     public static int verifyToken(Claims claims) {
-        if(claims==null){
+        if (claims == null) {
             return 1;
         }
         try {
             claims.getExpiration()
                     .before(new Date());
             // 需要自动刷新TOKEN
-            if((claims.getExpiration().getTime()-System.currentTimeMillis())>REFRESH_TIME*1000){
+            if ((claims.getExpiration().getTime() - System.currentTimeMillis()) > REFRESH_TIME * 1000) {
                 return -1;
-            }else {
+            } else {
                 return 0;
             }
         } catch (ExpiredJwtException ex) {
             return 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             return 2;
         }
     }
@@ -110,7 +110,7 @@ public class AppJwtUtil {
        /* Map map = new HashMap();
         map.put("id","11");*/
         System.out.println(AppJwtUtil.getToken(1102L));
-        Jws<Claims> jws = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLQQqEMAwA_5KzhURNt_qb1KZYQSi0wi6Lf9942NsMw3zh6AVW2DYmDGl2WabkZgreCaM6VXzhFBfJMcMARTqsxIG9Z888QLui3e3Tup5Pb81013KKmVzJTGo11nf9n8v4nMUaEY73DzTabjmDAAAA.4SuqQ42IGqCgBai6qd4RaVpVxTlZIWC826QA9kLvt9d-yVUw82gU47HDaSfOzgAcloZedYNNpUcd18Ne8vvjQA");
+        Jws<Claims> jws = AppJwtUtil.getJws("eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLQQqEMAwA_5KzhcYmrvU3qa1sF4RCKiiyf9942NsMw9zw6RUWiEmQQmYXhV-OpJCbN8xuDZ45JsRtJRigSocFp0jsceIwgB7Jbr20l_3pqqbvUncxkyObSWvG5Wz_k8fnrNYQ_fj9AWHNQV2DAAAA._2oy5QsRmC9W3Vbn98HdlBt0PG4kejpbAyZJx64YXhnUgkbwztQiwsNwbAOQdHFknPPaGMryBw1texeJyLPD0w");
         Claims claims = jws.getBody();
         System.out.println(claims.get("id"));
 

@@ -14,6 +14,7 @@
 
     <modules>
         <module>leadnews-gateway-app</module>
+        <module>leadnews-gateway-wemedia</module>
     </modules>
 
     <properties>
