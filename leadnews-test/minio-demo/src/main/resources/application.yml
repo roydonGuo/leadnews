@@ -1,0 +1,6 @@
+minio:
+  accessKey: minio
+  secretKey: roydon#Minio
+  bucket: leadnews
+  endpoint: http://106.14.105.101:9000
+  readPath: http://106.14.105.101:9000
