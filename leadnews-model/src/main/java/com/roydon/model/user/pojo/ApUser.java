@@ -13,8 +13,6 @@ import java.util.Date;
  * <p>
  * APP用户信息表
  * </p>
- *
- * @author itheima
  */
 @Data
 @TableName("ap_user")
