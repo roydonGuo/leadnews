@@ -20,6 +20,7 @@ import com.roydon.utils.thread.WmThreadLocalUtil;
 import com.roydon.wemedia.mapper.WmMaterialMapper;
 import com.roydon.wemedia.mapper.WmNewsMapper;
 import com.roydon.wemedia.mapper.WmNewsMaterialMapper;
+import com.roydon.wemedia.service.WmNewsAutoScanService;
 import com.roydon.wemedia.service.WmNewsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +40,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Transactional
 public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> implements WmNewsService {
+
+    @Resource
+    private WmNewsAutoScanService wmNewsAutoScanService;
 
     /**
      * 条件查询文章列表
@@ -80,13 +85,11 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         //按照发布时间倒序查询
         lambdaQueryWrapper.orderByDesc(WmNews::getPublishTime);
 
-
         page = page(page, lambdaQueryWrapper);
 
         //3.结果返回
         ResponseResult responseResult = new PageResponseResult(dto.getPage(), dto.getSize(), (int) page.getTotal());
         responseResult.setData(page.getRecords());
-
 
         return responseResult;
     }
@@ -106,7 +109,6 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         }
 
         //1.保存或修改文章
-
         WmNews wmNews = new WmNews();
         //属性拷贝 属性名词和类型相同才能拷贝
         BeanUtils.copyProperties(dto, wmNews);
@@ -136,8 +138,10 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         //4.不是草稿，保存文章封面图片与素材的关系，如果当前布局是自动，需要匹配封面图片
         saveRelativeInfoForCover(dto, wmNews, materials);
 
-        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+        //审核文章
+        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
 
+        return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 
     /**

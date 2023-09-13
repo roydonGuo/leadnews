@@ -4,7 +4,6 @@ import com.roydon.model.common.dto.ResponseResult;
 import com.roydon.model.wemedia.dto.WmNewsDto;
 import com.roydon.model.wemedia.dto.WmNewsPageReqDto;
 import com.roydon.wemedia.service.WmNewsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
