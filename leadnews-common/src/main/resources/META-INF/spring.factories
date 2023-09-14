@@ -1,2 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.roydon.common.exception.ExceptionCatch
+  com.roydon.common.exception.ExceptionCatch,\
+  com.roydon.common.swagger.SwaggerConfiguration,\
+  com.roydon.common.swagger.Swagger2Configuration,\
+  com.roydon.common.aliyun.GreenTextScan,\
+  com.roydon.common.aliyun.GreenImageScan,\
+  com.roydon.common.tess4j.Tess4jClient,\
+  com.roydon.common.redis.CacheService

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@ControllerAdvice  //控制器增强类
 @Slf4j
+@ControllerAdvice  //控制器增强类
 public class ExceptionCatch {
 
     /**
@@ -35,7 +35,7 @@ public class ExceptionCatch {
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public ResponseResult exception(CustomException e) {
-        log.error("catch exception:{}", e);
+        log.error("catch exception:{}", e.getMessage());
         return ResponseResult.errorResult(e.getAppHttpCodeEnum());
     }
 }
