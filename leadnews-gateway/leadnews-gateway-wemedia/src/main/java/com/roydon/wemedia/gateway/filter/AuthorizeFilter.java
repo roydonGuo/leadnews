@@ -1,6 +1,6 @@
-package com.heima.wemedia.gateway.filter;
+package com.roydon.wemedia.gateway.filter;
 
-import com.heima.wemedia.gateway.util.AppJwtUtil;
+import com.roydon.wemedia.gateway.util.AppJwtUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

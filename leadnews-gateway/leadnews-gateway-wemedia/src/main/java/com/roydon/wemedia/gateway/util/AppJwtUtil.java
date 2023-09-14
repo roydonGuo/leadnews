@@ -1,4 +1,4 @@
-package com.heima.wemedia.gateway.util;
+package com.roydon.wemedia.gateway.util;
 
 import io.jsonwebtoken.*;
 
