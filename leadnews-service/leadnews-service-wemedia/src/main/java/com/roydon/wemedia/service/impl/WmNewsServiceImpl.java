@@ -22,6 +22,7 @@ import com.roydon.wemedia.mapper.WmNewsMapper;
 import com.roydon.wemedia.mapper.WmNewsMaterialMapper;
 import com.roydon.wemedia.service.WmNewsAutoScanService;
 import com.roydon.wemedia.service.WmNewsService;
+import com.roydon.wemedia.service.WmNewsTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +44,9 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
 
     @Resource
     private WmNewsAutoScanService wmNewsAutoScanService;
+
+    @Resource
+    private WmNewsTaskService wmNewsTaskService;
 
     /**
      * 条件查询文章列表
@@ -129,18 +133,15 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         if (dto.getStatus().equals(WmNews.Status.NORMAL.getCode())) {
             return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
         }
-
         //3.不是草稿，保存文章内容图片与素材的关系
         //获取到文章内容中的图片信息
         List<String> materials = ectractUrlInfo(dto.getContent());
         saveRelativeInfoForContent(materials, wmNews.getId());
-
         //4.不是草稿，保存文章封面图片与素材的关系，如果当前布局是自动，需要匹配封面图片
         saveRelativeInfoForCover(dto, wmNews, materials);
-
         //审核文章
         wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
-
+        wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 
